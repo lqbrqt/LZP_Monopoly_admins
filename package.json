@@ -7,6 +7,10 @@
     "start": "node dist/index.js",
     "lint": "./node_modules/.bin/eslint . --ext .ts",
     "lint:fix": "./node_modules/.bin/eslint . --ext .ts --fix",
+    "generate:prisma": "prisma generate",
+    "migrate:up": "npx prisma migrate deploy",
+    "migrate:dev": "npx prisma migrate dev",
+
     "dev": "ts-node-dev --transpile-only --no-notify ./src/index.ts",
     "dev:single": "ts-node-dev --transpile-only --no-notify ./src/server.ts",
     "precommit-check": "tsc --noEmit --skipLibCheck",
@@ -21,8 +25,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@prisma/client": "^4.3.1",
     "fastify": "^3.22.1",
+    "prisma": "^4.3.1",
     "ts-node-dev": "^1.1.8",
+    "uuid": "^9.0.0",
     "winston": "^3.3.3"
   },
   "devDependencies": {
