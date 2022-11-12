@@ -1,7 +1,7 @@
 import cluster from 'cluster';
 import { cpus } from 'os';
 
-import { restServer } from './server';
+import { startServer } from './server';
 
 const numCpus = cpus().length;
 
@@ -10,5 +10,5 @@ if (cluster.isPrimary) {
     cluster.fork();
   }
 } else {
-  restServer();
+  startServer();
 }

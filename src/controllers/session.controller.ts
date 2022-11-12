@@ -1,11 +1,11 @@
 import { FastifyReply, FastifyRequest } from 'fastify';
 import prisma from '../prisma-client';
-import { UserAuditRequestBody } from './types';
+import { SessionAuditRequestBody } from './types';
 
-const audit = async (req: FastifyRequest<{Body: UserAuditRequestBody}>, reply: FastifyReply) => {
-  const data: UserAuditRequestBody = req.body;
+const audit = async (req: FastifyRequest<{Body: SessionAuditRequestBody}>, reply: FastifyReply) => {
+  const data: SessionAuditRequestBody = req.body;
 
-  return prisma.userAction.create({
+  return prisma.sessionAction.create({
     data: {
       roomId: data?.roomId?.toString(),
       userId: data?.userId?.toString(),

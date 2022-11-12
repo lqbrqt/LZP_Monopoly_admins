@@ -1,11 +1,11 @@
 import { FastifyInstance } from 'fastify';
 
-import { base as BaseController } from '../controllers/base.controller';
+import { audit } from '../controllers/session.controller';
 
-const base = (fastify: FastifyInstance, opts: any, next: (err?: Error) => void) => {
-  fastify.get('/', BaseController);
+const sessionRouter = (fastify: FastifyInstance, opts: any, next: (err?: Error) => void) => {
+  fastify.post('/session_audit', audit);
 
   next();
 };
 
-export default base;
+export default sessionRouter;

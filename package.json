@@ -10,7 +10,6 @@
     "generate:prisma": "prisma generate",
     "migrate:up": "npx prisma migrate deploy",
     "migrate:dev": "npx prisma migrate dev",
-
     "dev": "ts-node-dev --transpile-only --no-notify ./src/index.ts",
     "dev:single": "ts-node-dev --transpile-only --no-notify ./src/server.ts",
     "precommit-check": "tsc --noEmit --skipLibCheck",
@@ -27,6 +26,7 @@
   "dependencies": {
     "@prisma/client": "^4.3.1",
     "fastify": "^3.22.1",
+    "node-fetch": "2",
     "prisma": "^4.3.1",
     "ts-node-dev": "^1.1.8",
     "uuid": "^9.0.0",

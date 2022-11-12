@@ -10,3 +10,83 @@ generator client {
   provider = "prisma-client-js"
 }
 
+enum UserActionTypes {
+  USER_SIGNIN
+  USER_SIGNUP
+  USER_WINS
+  USER_MAKES_TURN
+  USER_BUYS_PROPERTY
+  USER_TAKES_CARD
+  ADMIN_ACTION
+}
+
+enum RoomActionTypes {
+  ROOM_CREATED
+  ROOM_DELETED
+  USER_WINS
+  ROOM_TIMEOUT
+  ADMIN_ACTION
+}
+
+enum SessionActionTypes {
+  SESSION_CREATED
+  SESSION_DELETED
+  SESSION_TIMEOUT
+  ADMIN_ACTION
+}
+
+model Game {
+  id  String @id @default(uuid())
+  userActions UserAction[]
+  roomActions RoomAction[]
+  winnerId  String? 
+}
+
+model UserAction {
+  id  String @id @default(uuid())
+  roomId  String?
+  userId  String
+  game  Game?  @relation(fields: [gameId], references: [id])
+  gameId  String?
+  type  UserActionTypes
+  message String?
+  timestamp DateTime
+
+  actionLog Action?
+}
+
+model RoomAction {
+  id  String @id @default(uuid())
+  roomId  String
+  userId  String?
+  game  Game?  @relation(fields: [gameId], references: [id])
+  gameId  String?
+  type  RoomActionTypes
+  message String?
+  timestamp DateTime
+
+  actionLog Action?
+}
+
+model SessionAction {
+  id  String @id @default(uuid())
+  roomId  String?
+  userId  String?
+  type  SessionActionTypes
+  message String?
+  timestamp DateTime
+
+  actionLog Action?
+}
+
+model Action {
+  id  String @id @default(uuid())
+  sessionAction SessionAction? @relation(fields: [sessionActionId], references: [id])
+  roomAction RoomAction? @relation(fields: [roomActionId], references: [id])
+  userAction UserAction? @relation(fields: [userActionId], references: [id])
+
+  sessionActionId String? @unique
+  roomActionId String? @unique
+  userActionId String? @unique
+}
+

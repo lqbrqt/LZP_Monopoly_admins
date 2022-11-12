@@ -1,11 +1,11 @@
 import { FastifyInstance } from 'fastify';
 
-import { base as BaseController } from '../controllers/base.controller';
+import { audit } from '../controllers/room.controller';
 
-const base = (fastify: FastifyInstance, opts: any, next: (err?: Error) => void) => {
-  fastify.get('/room_audio', BaseController);
+const roomRouter = (fastify: FastifyInstance, opts: any, next: (err?: Error) => void) => {
+  fastify.post('/room_audit', audit);
 
   next();
 };
 
-export default base;
+export default roomRouter;
